@@ -1,0 +1,14 @@
+c:\Users\Admin\OneDrive\Desktop\Jian J files\Programming\c#\RoadMapProjects\TaskTracker\TaskTracker\bin\Debug\net9.0\TaskTracker.exe
+c:\Users\Admin\OneDrive\Desktop\Jian J files\Programming\c#\RoadMapProjects\TaskTracker\TaskTracker\bin\Debug\net9.0\TaskTracker.deps.json
+c:\Users\Admin\OneDrive\Desktop\Jian J files\Programming\c#\RoadMapProjects\TaskTracker\TaskTracker\bin\Debug\net9.0\TaskTracker.runtimeconfig.json
+c:\Users\Admin\OneDrive\Desktop\Jian J files\Programming\c#\RoadMapProjects\TaskTracker\TaskTracker\bin\Debug\net9.0\TaskTracker.dll
+c:\Users\Admin\OneDrive\Desktop\Jian J files\Programming\c#\RoadMapProjects\TaskTracker\TaskTracker\bin\Debug\net9.0\TaskTracker.pdb
+c:\Users\Admin\OneDrive\Desktop\Jian J files\Programming\c#\RoadMapProjects\TaskTracker\TaskTracker\obj\Debug\net9.0\TaskTracker.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\Admin\OneDrive\Desktop\Jian J files\Programming\c#\RoadMapProjects\TaskTracker\TaskTracker\obj\Debug\net9.0\TaskTracker.AssemblyInfoInputs.cache
+c:\Users\Admin\OneDrive\Desktop\Jian J files\Programming\c#\RoadMapProjects\TaskTracker\TaskTracker\obj\Debug\net9.0\TaskTracker.AssemblyInfo.cs
+c:\Users\Admin\OneDrive\Desktop\Jian J files\Programming\c#\RoadMapProjects\TaskTracker\TaskTracker\obj\Debug\net9.0\TaskTracker.csproj.CoreCompileInputs.cache
+c:\Users\Admin\OneDrive\Desktop\Jian J files\Programming\c#\RoadMapProjects\TaskTracker\TaskTracker\obj\Debug\net9.0\TaskTracker.dll
+c:\Users\Admin\OneDrive\Desktop\Jian J files\Programming\c#\RoadMapProjects\TaskTracker\TaskTracker\obj\Debug\net9.0\refint\TaskTracker.dll
+c:\Users\Admin\OneDrive\Desktop\Jian J files\Programming\c#\RoadMapProjects\TaskTracker\TaskTracker\obj\Debug\net9.0\TaskTracker.pdb
+c:\Users\Admin\OneDrive\Desktop\Jian J files\Programming\c#\RoadMapProjects\TaskTracker\TaskTracker\obj\Debug\net9.0\TaskTracker.genruntimeconfig.cache
+c:\Users\Admin\OneDrive\Desktop\Jian J files\Programming\c#\RoadMapProjects\TaskTracker\TaskTracker\obj\Debug\net9.0\ref\TaskTracker.dll
