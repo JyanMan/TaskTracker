@@ -12,8 +12,9 @@ public class Program {
 }
 
 class TaskManager {
-    public Dictionary<string, string> Tasks = [];
+    public Dictionary<int, Task> Tasks = [];
     public TaskManager() {}
+    private int currID = 0;
 
     public void Init() {
         int chosenFunction = -1;
@@ -41,9 +42,9 @@ class TaskManager {
     public void ListTasks() {
         Console.WriteLine("The following are the tasks");
         int increment = 0;
-        foreach (KeyValuePair<string, string> task in  Tasks) {
+        foreach (KeyValuePair<int, Task> task in  Tasks) {
             increment++;
-            Console.WriteLine(increment + ". " + task.Key + " -> " + task.Value);
+            Console.WriteLine(increment + ". " + task.Value.Name + " -> " + task.Value.Description);
         }
         if (Tasks.Count <= 0) {
             Console.WriteLine("There are no current task");
@@ -57,9 +58,12 @@ class TaskManager {
         Console.WriteLine("Input task description");
         string? taskDescription = Console.ReadLine();
 
-        // Task newTask = new();
+        Task newTask = new(taskName, taskDescription, currID);
+        Tasks.Add(newTask.ID, newTask);
 
-        Tasks.Add(taskName, taskDescription);
+        currID++;
+
+        // Tasks.Add(taskName, taskDescription);
     }
 }
 
