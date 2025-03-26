@@ -12,3 +12,4 @@ c:\Users\Admin\OneDrive\Desktop\Jian J files\Programming\c#\RoadMapProjects\Task
 c:\Users\Admin\OneDrive\Desktop\Jian J files\Programming\c#\RoadMapProjects\TaskTracker\TaskTracker\obj\Debug\net9.0\TaskTracker.pdb
 c:\Users\Admin\OneDrive\Desktop\Jian J files\Programming\c#\RoadMapProjects\TaskTracker\TaskTracker\obj\Debug\net9.0\TaskTracker.genruntimeconfig.cache
 c:\Users\Admin\OneDrive\Desktop\Jian J files\Programming\c#\RoadMapProjects\TaskTracker\TaskTracker\obj\Debug\net9.0\ref\TaskTracker.dll
+c:\Users\Admin\OneDrive\Desktop\Jian J files\Programming\c#\RoadMapProjects\TaskTracker\TaskTracker\obj\Debug\net9.0\TaskTracker.sourcelink.json

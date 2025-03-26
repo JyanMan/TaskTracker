@@ -1,8 +1,65 @@
-﻿namespace TaskTracker;
+﻿using System.Collections.Generic;
+
+namespace TaskTracker;
 
 public class Program {
     static void Main(string[] args) {
         Console.WriteLine("Hello World!");
+
+        TaskManager taskManager = new();
+        taskManager.Init();
+    }
+}
+
+class TaskManager {
+    public Dictionary<string, string> Tasks = [];
+    public TaskManager() {}
+
+    public void Init() {
+        int chosenFunction = -1;
+        do {
+            Console.WriteLine("Choose From the following Functions");
+            Console.WriteLine("0. Exit");
+            Console.WriteLine("1. List Task");
+            Console.WriteLine("2. Add Task");
+            Console.WriteLine("3. Delete Task");
+            chosenFunction = Convert.ToInt32(Console.ReadLine());
+
+            switch (chosenFunction) {
+                case 1:
+                    ListTasks();
+                    break;
+                case 2:
+                    Add();
+                    break;
+                default:
+                    break;
+            }
+        } while (chosenFunction != 0);
+    }
+
+    public void ListTasks() {
+        Console.WriteLine("The following are the tasks");
+        int increment = 0;
+        foreach (KeyValuePair<string, string> task in  Tasks) {
+            increment++;
+            Console.WriteLine(increment + ". " + task.Key + " -> " + task.Value);
+        }
+        if (Tasks.Count <= 0) {
+            Console.WriteLine("There are no current task");
+        }
+        Console.WriteLine("***************************** \n");
+    }
+
+    public void Add() {
+        Console.WriteLine("Input Task name");
+        string? taskName = Console.ReadLine();
+        Console.WriteLine("Input task description");
+        string? taskDescription = Console.ReadLine();
+
+        // Task newTask = new();
+
+        Tasks.Add(taskName, taskDescription);
     }
 }
 
