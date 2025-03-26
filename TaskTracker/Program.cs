@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace TaskTracker;
+﻿namespace TaskTracker;
 
 public class Program {
     static void Main(string[] args) {
@@ -19,12 +17,13 @@ class TaskManager {
     public void Init() {
         int chosenFunction = -1;
         do {
-            Console.WriteLine("Choose From the following Functions");
             Console.WriteLine("0. Exit");
             Console.WriteLine("1. List Task");
             Console.WriteLine("2. Add Task");
             Console.WriteLine("3. Delete Task");
+            Console.Write("Choose from the following Functions: ");
             chosenFunction = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("");
 
             switch (chosenFunction) {
                 case 1:
@@ -40,8 +39,8 @@ class TaskManager {
     }
 
     public void ListTasks() {
-        Console.WriteLine("The following are the tasks");
         int increment = 0;
+        Console.WriteLine("The following are the tasks");
         foreach (KeyValuePair<int, Task> task in  Tasks) {
             increment++;
             Console.WriteLine(increment + ". " + task.Value.Name + " -> " + task.Value.Description);
@@ -53,17 +52,27 @@ class TaskManager {
     }
 
     public void Add() {
-        Console.WriteLine("Input Task name");
-        string? taskName = Console.ReadLine();
-        Console.WriteLine("Input task description");
-        string? taskDescription = Console.ReadLine();
+
+        string? taskName;
+        string? taskDescription;
+
+        do {
+            Console.Write("Input Task name: ");
+            taskName = Console.ReadLine();
+            Console.Write("Input task description: ");
+            taskDescription = Console.ReadLine();
+            Console.WriteLine("");
+            if (taskName == null || taskDescription == null || taskName == "" || taskDescription == "") 
+            {
+                Console.WriteLine("Invalid Input");
+                Console.WriteLine("**********************");
+            }
+        } while (taskName == null || taskDescription == null || taskName == "" || taskDescription == "");
 
         Task newTask = new(taskName, taskDescription, currID);
         Tasks.Add(newTask.ID, newTask);
 
         currID++;
-
-        // Tasks.Add(taskName, taskDescription);
     }
 }
 
