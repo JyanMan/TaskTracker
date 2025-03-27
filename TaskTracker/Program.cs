@@ -119,12 +119,14 @@ class TaskManager {
 
     public void SetFinishedTask(int id) {
         OngoingTasks[id].SetFinished();
-        OngoingTasks.Remove(id);
+        if (OngoingTasks.ContainsKey(id))
+            OngoingTasks.Remove(id);
     }
 
     public void SetTaskInProgress(int id) {
         Tasks[id].SetOngoing();
-        OngoingTasks.Add(id, Tasks[id]);
+        if (!OngoingTasks.ContainsKey(id))
+            OngoingTasks.Add(id, Tasks[id]);
     }
 
     public void SetTaskStatus() {
@@ -134,15 +136,16 @@ class TaskManager {
         int chosenFunction = Convert.ToInt32(Console.ReadLine());
         Console.WriteLine("");
         TaskClass chosenTask = Tasks[chosenFunction];
-        Console.WriteLine("Choose y for finished and x for ongoing");
-        char chosenStatus = Convert.ToChar(Console.ReadLine());
+        Console.WriteLine("1. Set to finished");
+        Console.WriteLine("2. Set to In Progress ");
+        int chosenStatus = Convert.ToInt32(Console.ReadLine());
 
         switch (chosenStatus) {
-            case 'y':
+            case 1:
                 SetFinishedTask(chosenFunction);
                 break;
-            case 'x':
-                chosenTask.SetOngoing();
+            case 2:
+                SetTaskInProgress(chosenFunction);
                 break;
         }
     }
