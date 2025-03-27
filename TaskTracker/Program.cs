@@ -18,6 +18,7 @@ class TaskManager {
     public void Init() {
         int chosenFunction = -1;
         do {
+
             Console.WriteLine("0. Exit");
             Console.WriteLine("1. List Task");
             Console.WriteLine("2. List All Tasks in Progress");
@@ -97,22 +98,20 @@ class TaskManager {
         string? taskDescription;
 
         do {
-            Console.Write("Input Task name: ");
-            taskName = Console.ReadLine();
             Console.Write("Input task description: ");
             taskDescription = Console.ReadLine();
             Console.WriteLine("");
-            if (taskName == null || taskDescription == null || taskName == "" || taskDescription == "") 
+            if (taskDescription == null || taskDescription == "") 
             {
-                Console.WriteLine("Invalid Input");
+                Console.WriteLine("     Invalid Input");
                 Console.WriteLine("**********************");
             }
-        } while (taskName == null || taskDescription == null || taskName == "" || taskDescription == "");
+        } while (taskDescription == null || taskDescription == "");
 
-        TaskClass newTask = new(taskName, taskDescription, currID);
+        TaskClass newTask = new(taskDescription, currID);
         Tasks.Add(newTask.ID, newTask);
         OngoingTasks.Add(newTask.ID, newTask);
-        Console.WriteLine("the key is " + newTask.ID);
+        Console.WriteLine("Task added successfully (ID: " + newTask.ID + ")");
 
         currID++;
     }
@@ -151,7 +150,7 @@ class TaskManager {
     }
 
     static string WriteTask(TaskClass task) {
-        return (task.Name + " -> " + task.Description);
+        return (task.Description + "(ID: " + task.ID + ")");
     }
 }
 
