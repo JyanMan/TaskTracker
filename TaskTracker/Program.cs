@@ -11,6 +11,7 @@ public class Program {
 
 class TaskManager {
     public Dictionary<int, Task> Tasks = [];
+    public Dictionary<int, Task> OngoingTasks = [];
     public TaskManager() {}
     private int currID = 0;
 
@@ -19,8 +20,10 @@ class TaskManager {
         do {
             Console.WriteLine("0. Exit");
             Console.WriteLine("1. List Task");
-            Console.WriteLine("2. Add Task");
-            Console.WriteLine("3. Delete Task");
+            Console.WriteLine("2. List All Tasks in Progress");
+            Console.WriteLine("3. List Finished Task");
+            Console.WriteLine("4. Add Task");
+            Console.WriteLine("5. Delete Task");
             Console.Write("Choose from the following Functions: ");
             chosenFunction = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("");
@@ -30,7 +33,15 @@ class TaskManager {
                     ListTasks();
                     break;
                 case 2:
+                    ListOngoingTasks();
+                    break;
+                case 3:
+                    
+                    break;
+                case 4:
                     Add();
+                    break;
+                case 5:
                     break;
                 default:
                     break;
@@ -42,6 +53,19 @@ class TaskManager {
         int increment = 0;
         Console.WriteLine("The following are the tasks");
         foreach (KeyValuePair<int, Task> task in  Tasks) {
+            increment++;
+            Console.WriteLine(increment + ". " + task.Value.Name + " -> " + task.Value.Description);
+        }
+        if (Tasks.Count <= 0) {
+            Console.WriteLine("There are no current task");
+        }
+        Console.WriteLine("***************************** \n");
+    }
+
+    public void ListOngoingTasks() {
+        int increment = 0;
+        Console.WriteLine("The following are the tasks");
+        foreach (KeyValuePair<int, Task> task in OngoingTasks) {
             increment++;
             Console.WriteLine(increment + ". " + task.Value.Name + " -> " + task.Value.Description);
         }
@@ -71,8 +95,14 @@ class TaskManager {
 
         Task newTask = new(taskName, taskDescription, currID);
         Tasks.Add(newTask.ID, newTask);
+        OngoingTasks.Add(newTask.ID, newTask);
 
         currID++;
+    }
+
+    public void SetFinishedTask(int id) {
+        OngoingTasks[id].SetFinished();
+        OngoingTasks.Remove(id);
     }
 }
 
