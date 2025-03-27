@@ -14,5 +14,5 @@ public class TaskClass {
     }
     public void SetOngoing() {
         InProgress = true;
-    }
+    } 
 }
