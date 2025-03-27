@@ -10,10 +10,10 @@ public class Program {
 }
 
 class TaskManager {
-    public Dictionary<int, Task> Tasks = [];
-    public Dictionary<int, Task> OngoingTasks = [];
+    public Dictionary<int, TaskClass> Tasks = [];
+    public Dictionary<int, TaskClass> OngoingTasks = [];
     public TaskManager() {}
-    private int currID = 0;
+    private int currID = 1;
 
     public void Init() {
         int chosenFunction = -1;
@@ -24,6 +24,7 @@ class TaskManager {
             Console.WriteLine("3. List Finished Task");
             Console.WriteLine("4. Add Task");
             Console.WriteLine("5. Delete Task");
+            Console.WriteLine("6. Mark Task as done or in progress");
             Console.Write("Choose from the following Functions: ");
             chosenFunction = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("");
@@ -36,12 +37,15 @@ class TaskManager {
                     ListOngoingTasks();
                     break;
                 case 3:
-                    
+                    ListFinishedTasks();
                     break;
                 case 4:
                     Add();
                     break;
                 case 5:
+                    break;
+                case 6:
+                    SetTaskStatus();
                     break;
                 default:
                     break;
@@ -52,9 +56,9 @@ class TaskManager {
     public void ListTasks() {
         int increment = 0;
         Console.WriteLine("The following are the tasks");
-        foreach (KeyValuePair<int, Task> task in  Tasks) {
+        foreach (KeyValuePair<int, TaskClass> task in  Tasks) {
             increment++;
-            Console.WriteLine(increment + ". " + task.Value.Name + " -> " + task.Value.Description);
+            Console.WriteLine(increment + ". " + WriteTask(task.Value));
         }
         if (Tasks.Count <= 0) {
             Console.WriteLine("There are no current task");
@@ -65,14 +69,26 @@ class TaskManager {
     public void ListOngoingTasks() {
         int increment = 0;
         Console.WriteLine("The following are the tasks");
-        foreach (KeyValuePair<int, Task> task in OngoingTasks) {
+        foreach (KeyValuePair<int, TaskClass> task in OngoingTasks) {
             increment++;
-            Console.WriteLine(increment + ". " + task.Value.Name + " -> " + task.Value.Description);
+            Console.WriteLine(increment + ". " + WriteTask(task.Value));
         }
         if (Tasks.Count <= 0) {
             Console.WriteLine("There are no current task");
         }
         Console.WriteLine("***************************** \n");
+    }
+
+    public void ListFinishedTasks() {
+        int increment = 0;
+        Console.WriteLine("The following are the finished tasks:");
+        foreach (KeyValuePair<int, TaskClass> task in Tasks) {
+            if (!OngoingTasks.ContainsKey(task.Key)) {
+                increment++;
+                Console.WriteLine(increment + ". " + WriteTask(task.Value));
+            }
+        }
+        Console.WriteLine("******************");
     }
 
     public void Add() {
@@ -93,9 +109,10 @@ class TaskManager {
             }
         } while (taskName == null || taskDescription == null || taskName == "" || taskDescription == "");
 
-        Task newTask = new(taskName, taskDescription, currID);
+        TaskClass newTask = new(taskName, taskDescription, currID);
         Tasks.Add(newTask.ID, newTask);
         OngoingTasks.Add(newTask.ID, newTask);
+        Console.WriteLine("the key is " + newTask.ID);
 
         currID++;
     }
@@ -103,6 +120,35 @@ class TaskManager {
     public void SetFinishedTask(int id) {
         OngoingTasks[id].SetFinished();
         OngoingTasks.Remove(id);
+    }
+
+    public void SetTaskInProgress(int id) {
+        Tasks[id].SetOngoing();
+        OngoingTasks.Add(id, Tasks[id]);
+    }
+
+    public void SetTaskStatus() {
+        ListTasks();
+        Console.WriteLine("Indicate the number of the task to change status: ");
+        
+        int chosenFunction = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine("");
+        TaskClass chosenTask = Tasks[chosenFunction];
+        Console.WriteLine("Choose y for finished and x for ongoing");
+        char chosenStatus = Convert.ToChar(Console.ReadLine());
+
+        switch (chosenStatus) {
+            case 'y':
+                SetFinishedTask(chosenFunction);
+                break;
+            case 'x':
+                chosenTask.SetOngoing();
+                break;
+        }
+    }
+
+    static string WriteTask(TaskClass task) {
+        return (task.Name + " -> " + task.Description);
     }
 }
 
