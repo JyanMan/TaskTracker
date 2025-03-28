@@ -25,6 +25,22 @@ public class Program {
                 if (TaskManager.IsValidParameterCount(2, args.Length))
                     taskManager.Delete(Convert.ToInt32(args[1]));
                 break;
+            case "mark-in-progress":
+                if (args.Length < 2) 
+                {
+                    Console.WriteLine("indicate the ID of the task to mark in progress");
+                    return;
+                }
+                taskManager.MarkInProgress(Convert.ToInt32(args[1]));
+                break;
+            case "mark-done":
+                if (args.Length < 2) 
+                {
+                    Console.WriteLine("indicate the ID of the task to mark done");
+                    return;
+                }
+                taskManager.MarkDone(Convert.ToInt32(args[1]));
+                break;
             default:
                 Console.WriteLine("Invalid command: ");
                 for (int i = 0; i < args.Length; i++) {
@@ -42,6 +58,7 @@ class TaskManager {
     public Dictionary<string, List<TaskClass>> TaskWithStatus = new();
     private int currID = 0;
     string filePath = "TasksList.json";
+    public HashSet<string> statuses = new(){"todo", "done", "in-progress"};
 
     public TaskManager() 
     {
@@ -60,29 +77,43 @@ class TaskManager {
                 {
                     currID = task.Value.ID+1;
                 }
-                string status = task.Value.status;                
-                switch (status)
+                string status = task.Value.status;
+                if (statuses.Contains(status))
                 {
-                    case "todo":
-                        if (!TaskWithStatus.ContainsKey(status)) 
-                        {
-                            TaskWithStatus[status] = new();
-                        }
-                        TaskWithStatus[status].Add(task.Value);
-                        break;
-                    case "in-progress":
-                        if (!TaskWithStatus.ContainsKey(status)) 
-                        {
-                            TaskWithStatus[status] = new();
-                        }
-                        TaskWithStatus[status].Add(task.Value);
-                        break;
-                    case "done":
-                        break;
-                    default:
-                        Console.WriteLine("error in status value, program.cs line 67");
-                        break;
+                    if (!TaskWithStatus.ContainsKey(status)) 
+                    {
+                        TaskWithStatus[status] = new();
+                    }
+                    TaskWithStatus[status].Add(task.Value);
                 }
+//                switch (status)
+//                {
+//                    case "todo":
+//                        if (!TaskWithStatus.ContainsKey(status)) 
+//                        {
+//                            TaskWithStatus[status] = new();
+//                        }
+//                        TaskWithStatus[status].Add(task.Value);
+//                        break;
+//                    case "in-progress":
+//                        if (!TaskWithStatus.ContainsKey(status)) 
+//                        {
+//                            TaskWithStatus[status] = new();
+//                        }
+//                        TaskWithStatus[status].Add(task.Value);
+//                        break;
+//                    case "done":
+//                        if (!TaskWithStatus.ContainsKey(status)) 
+//                        {
+//                            TaskWithStatus[status] = new();
+//                        }
+//                        TaskWithStatus[status].Add(task.Value);
+//
+//                        break;
+//                    default:
+//                        Console.WriteLine("error in status value, program.cs line 67");
+//                        break;
+//                }
             }
         }
     }
@@ -122,35 +153,36 @@ class TaskManager {
 
     public void ListToDo(string status)
     {
-        switch (status) 
+        if (!statuses.Contains(status))
         {
-            case "todo":
-                for (int i = 0; i < TaskWithStatus[status].Count; i++)
-                {
-                    TaskClass task = TaskWithStatus[status][i];
-                    Console.WriteLine("*" + task.Description + " (ID: " + task.ID + ")");
-                }
-                break;
-            case "in-progress":
-                for (int i = 0; i < TaskWithStatus[status].Count; i++)
-                {
-                    TaskClass task = TaskWithStatus[status][i];
-                    Console.WriteLine("*" + task.Description + " (ID: " + task.ID + ")");
-                }
-                break;
-            case "done":
-                for (int i = 0; i < TaskWithStatus[status].Count; i++)
-                {
-                    TaskClass task = TaskWithStatus[status][i];
-                    Console.WriteLine("*" + task.Description + " (ID: " + task.ID + ")");
-                }
-                break;
-            default:
-                Console.WriteLine("error status does not exist at line 130 program.cs");
-                break;
-
+            Console.WriteLine("invalid command, with status " + status);
         }
-   }
+        for (int i = 0; i < TaskWithStatus[status].Count; i++)
+        {
+            TaskClass task = TaskWithStatus[status][i];
+            Console.WriteLine("*" + task.Description + " (ID: " + task.ID + ")");
+        } 
+    }
+
+    public void MarkInProgress(int givenID) 
+    {
+        if (!Tasks.ContainsKey(givenID))
+        {
+            Console.WriteLine("task list does not contain task with ID " + givenID);
+            return;
+        }
+        Tasks[givenID].status = "in-progress";
+    }
+
+    public void MarkDone(int givenID)
+    {
+        if (!Tasks.ContainsKey(givenID))
+        {
+            Console.WriteLine("task list does not contain task with ID " + givenID);
+            return;
+        }
+        Tasks[givenID].status = "done";
+    }
 
     public void End() 
     {
