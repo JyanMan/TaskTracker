@@ -1,42 +1,14 @@
 {
-  "1": {
-    "ID": 1,
-    "Description": "asd",
-    "status": "in-progress",
-    "CreatedAt": null,
-    "UpdatedAt": null
-  },
-  "3": {
-    "ID": 3,
-    "Description": "asdf",
-    "status": "in-progress",
-    "CreatedAt": null,
-    "UpdatedAt": null
-  },
-  "4": {
-    "ID": 4,
-    "Description": "another freaking damn thing to do man",
-    "status": "in-progress",
-    "CreatedAt": null,
-    "UpdatedAt": null
-  },
   "0": {
     "ID": 0,
-    "Description": "talk to somebody",
-    "status": "in-progress",
+    "Description": "some stuff",
+    "status": "todo",
     "CreatedAt": null,
     "UpdatedAt": null
   },
-  "5": {
-    "ID": 5,
-    "Description": "fjoisdjf",
-    "status": "in-progress",
-    "CreatedAt": null,
-    "UpdatedAt": null
-  },
-  "6": {
-    "ID": 6,
-    "Description": "as",
+  "1": {
+    "ID": 1,
+    "Description": "asdfs",
     "status": "in-progress",
     "CreatedAt": null,
     "UpdatedAt": null

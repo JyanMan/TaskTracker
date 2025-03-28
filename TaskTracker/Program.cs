@@ -12,14 +12,24 @@ public class Program {
                     taskManager.Add(args[1]);
                 break;
             case "list":
-                if (TaskManager.IsValidParameterCount(1, args.Length))
-                    taskManager.ListTasks();
+                if (TaskManager.IsValidParameterCount(2, args.Length)) 
+                {
+                    if (args.Length == 2) {
+                        taskManager.ListToDo(args[1]);
+                    }
+                    else
+                        taskManager.ListTasks();
+                }
                 break;
-            case "remove":
+            case "delete":
                 if (TaskManager.IsValidParameterCount(2, args.Length))
                     taskManager.Delete(Convert.ToInt32(args[1]));
                 break;
             default:
+                Console.WriteLine("Invalid command: ");
+                for (int i = 0; i < args.Length; i++) {
+                    Console.Write( args[i] + " ");
+                }
                 break;
         }
 
@@ -29,7 +39,7 @@ public class Program {
 
 class TaskManager {
     public Dictionary<int, TaskClass> Tasks = [];
-    public Dictionary<int, TaskClass> OngoingTasks = [];
+    public Dictionary<string, List<TaskClass>> TaskWithStatus = new();
     private int currID = 0;
     string filePath = "TasksList.json";
 
@@ -43,12 +53,35 @@ class TaskManager {
         if (File.Exists(filePath)) 
         {
             string fileContent = File.ReadAllText(filePath);
-            Tasks = JsonSerializer.Deserialize<Dictionary<int, TaskClass>>(fileContent) ?? [];
+            Tasks = JsonSerializer.Deserialize<Dictionary<int, TaskClass>>(fileContent) ?? new();
             foreach (var task in Tasks) 
             {
                 if (task.Value.ID >= currID)
                 {
                     currID = task.Value.ID+1;
+                }
+                string status = task.Value.status;                
+                switch (status)
+                {
+                    case "todo":
+                        if (!TaskWithStatus.ContainsKey(status)) 
+                        {
+                            TaskWithStatus[status] = new();
+                        }
+                        TaskWithStatus[status].Add(task.Value);
+                        break;
+                    case "in-progress":
+                        if (!TaskWithStatus.ContainsKey(status)) 
+                        {
+                            TaskWithStatus[status] = new();
+                        }
+                        TaskWithStatus[status].Add(task.Value);
+                        break;
+                    case "done":
+                        break;
+                    default:
+                        Console.WriteLine("error in status value, program.cs line 67");
+                        break;
                 }
             }
         }
@@ -73,7 +106,9 @@ class TaskManager {
             Console.WriteLine("Tasks list does not contain task with ID " + givenID);
             return;
         }
+        Console.WriteLine(givenID);
         Tasks.Remove(givenID);
+        End();
     }
     
 
@@ -84,6 +119,38 @@ class TaskManager {
             Console.WriteLine("*" + task.Value.Description + " (ID: " + task.Value.ID + ")");
         }
     }
+
+    public void ListToDo(string status)
+    {
+        switch (status) 
+        {
+            case "todo":
+                for (int i = 0; i < TaskWithStatus[status].Count; i++)
+                {
+                    TaskClass task = TaskWithStatus[status][i];
+                    Console.WriteLine("*" + task.Description + " (ID: " + task.ID + ")");
+                }
+                break;
+            case "in-progress":
+                for (int i = 0; i < TaskWithStatus[status].Count; i++)
+                {
+                    TaskClass task = TaskWithStatus[status][i];
+                    Console.WriteLine("*" + task.Description + " (ID: " + task.ID + ")");
+                }
+                break;
+            case "done":
+                for (int i = 0; i < TaskWithStatus[status].Count; i++)
+                {
+                    TaskClass task = TaskWithStatus[status][i];
+                    Console.WriteLine("*" + task.Description + " (ID: " + task.ID + ")");
+                }
+                break;
+            default:
+                Console.WriteLine("error status does not exist at line 130 program.cs");
+                break;
+
+        }
+   }
 
     public void End() 
     {
