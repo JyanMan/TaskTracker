@@ -1,160 +1,89 @@
-﻿namespace TaskTracker;
+﻿using System.Text.Json;
+
+namespace TaskTracker;
 
 public class Program {
     static void Main(string[] args) {
-        Console.WriteLine("Hello World!");
+        TaskManager taskManager = new();    
+        switch (args[0]) 
+        {
+            case "add":
+                if (args[1] == null || args[1] == "") 
+                {
+                    Console.WriteLine("Input a parameter");
+                    return;
+                }
+                taskManager.Add(args[1]);
+                break;
+            case "list":
+                taskManager.ListTasks();
+                break;
+            case "remove":
+                taskManager.Delete(Convert.ToInt32(args[1]));
+                break;
+            default:
+                break;
+        }
 
-        TaskManager taskManager = new();
-        taskManager.Init();
+        taskManager.End();
     }
 }
 
 class TaskManager {
     public Dictionary<int, TaskClass> Tasks = [];
     public Dictionary<int, TaskClass> OngoingTasks = [];
-    public TaskManager() {}
-    private int currID = 1;
+    private int currID = 0;
+    string filePath = "TasksList.json";
 
-    public void Init() {
-        int chosenFunction = -1;
-        do {
-
-            Console.WriteLine("0. Exit");
-            Console.WriteLine("1. List Task");
-            Console.WriteLine("2. List All Tasks in Progress");
-            Console.WriteLine("3. List Finished Task");
-            Console.WriteLine("4. Add Task");
-            Console.WriteLine("5. Delete Task");
-            Console.WriteLine("6. Mark Task as done or in progress");
-            Console.Write("Choose from the following Functions: ");
-            chosenFunction = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("");
-
-            switch (chosenFunction) {
-                case 1:
-                    ListTasks();
-                    break;
-                case 2:
-                    ListOngoingTasks();
-                    break;
-                case 3:
-                    ListFinishedTasks();
-                    break;
-                case 4:
-                    Add();
-                    break;
-                case 5:
-                    break;
-                case 6:
-                    SetTaskStatus();
-                    break;
-                default:
-                    break;
-            }
-        } while (chosenFunction != 0);
+    public TaskManager() 
+    {
+        Init(); 
     }
 
-    public void ListTasks() {
-        int increment = 0;
-        Console.WriteLine("The following are the tasks");
-        foreach (KeyValuePair<int, TaskClass> task in  Tasks) {
-            increment++;
-            Console.WriteLine(increment + ". " + WriteTask(task.Value));
-        }
-        if (Tasks.Count <= 0) {
-            Console.WriteLine("There are no current task");
-        }
-        Console.WriteLine("***************************** \n");
-    }
-
-    public void ListOngoingTasks() {
-        int increment = 0;
-        Console.WriteLine("The following are the tasks");
-        foreach (KeyValuePair<int, TaskClass> task in OngoingTasks) {
-            increment++;
-            Console.WriteLine(increment + ". " + WriteTask(task.Value));
-        }
-        if (Tasks.Count <= 0) {
-            Console.WriteLine("There are no current task");
-        }
-        Console.WriteLine("***************************** \n");
-    }
-
-    public void ListFinishedTasks() {
-        int increment = 0;
-        Console.WriteLine("The following are the finished tasks:");
-        foreach (KeyValuePair<int, TaskClass> task in Tasks) {
-            if (!OngoingTasks.ContainsKey(task.Key)) {
-                increment++;
-                Console.WriteLine(increment + ". " + WriteTask(task.Value));
-            }
-        }
-        Console.WriteLine("******************");
-    }
-
-    public void Add() {
-
-        string? taskName;
-        string? taskDescription;
-
-        do {
-            Console.Write("Input task description: ");
-            taskDescription = Console.ReadLine();
-            Console.WriteLine("");
-            if (taskDescription == null || taskDescription == "") 
+    private void Init()
+    {
+        if (File.Exists(filePath)) 
+        {
+            string fileContent = File.ReadAllText(filePath);
+            Tasks = JsonSerializer.Deserialize<Dictionary<int, TaskClass>>(fileContent) ?? [];
+            foreach (var task in Tasks) 
             {
-                Console.WriteLine("     Invalid Input");
-                Console.WriteLine("**********************");
+                if (task.Value.ID >= currID)
+                {
+                    currID = task.Value.ID+1;
+                }
             }
-        } while (taskDescription == null || taskDescription == "");
+        }
+    }
 
-        TaskClass newTask = new(taskDescription, currID);
-        Tasks.Add(newTask.ID, newTask);
-        OngoingTasks.Add(newTask.ID, newTask);
-        Console.WriteLine("Task added successfully (ID: " + newTask.ID + ")");
-
+    public void Add(string taskDesc) 
+    {
+        TaskClass newTask = new() { ID = currID, Description = taskDesc };
+        Tasks.Add(currID, newTask);
         currID++;
     }
 
-    public void SetFinishedTask(int id) {
-        OngoingTasks[id].SetFinished();
-        if (OngoingTasks.ContainsKey(id))
-            OngoingTasks.Remove(id);
+    public void Delete(int givenID)
+    {
+        Tasks.Remove(givenID);
     }
+    
 
-    public void SetTaskInProgress(int id) {
-        Tasks[id].SetOngoing();
-        if (!OngoingTasks.ContainsKey(id))
-            OngoingTasks.Add(id, Tasks[id]);
-    }
-
-    public void SetTaskStatus() {
-        ListTasks();
-        Console.WriteLine("Indicate the number of the task to change status: ");
-        
-        int chosenFunction = Convert.ToInt32(Console.ReadLine());
-        Console.WriteLine("");
-        TaskClass chosenTask = Tasks[chosenFunction];
-        Console.WriteLine("1. Set to finished");
-        Console.WriteLine("2. Set to In Progress ");
-        int chosenStatus = Convert.ToInt32(Console.ReadLine());
-
-        switch (chosenStatus) {
-            case 1:
-                SetFinishedTask(chosenFunction);
-                break;
-            case 2:
-                SetTaskInProgress(chosenFunction);
-                break;
+    public void ListTasks() 
+    {
+        foreach (var task in Tasks) 
+        {
+            Console.WriteLine("*" + task.Value.Description + " (ID: " + task.Value.ID + ")");
         }
     }
 
-    static string WriteTask(TaskClass task) {
-        return (task.Description + "(ID: " + task.ID + ")");
+    public void End() 
+    {
+        string newFileContent = JsonSerializer.Serialize(Tasks, new JsonSerializerOptions { WriteIndented = true });
+        File.WriteAllText(filePath, newFileContent);
     }
 }
-
-
+    
 // The application should run from the command line, accept user actions and inputs as arguments, and store the tasks in a JSON file. The user should be able to:
 
 //     Add, Update, and Delete tasks
