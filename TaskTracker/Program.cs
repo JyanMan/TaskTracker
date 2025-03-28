@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System;
+using System.Text.Json;
 
 namespace TaskTracker;
 
@@ -28,7 +29,7 @@ public class Program {
             case "mark-in-progress":
                 if (args.Length < 2) 
                 {
-                    Console.WriteLine("Error: Correct way --> [ID of task] mark-[status]");
+                    Console.WriteLine("Error: Correct way --> mark-[status] [ID of task]");
                     return;
                 }
                 taskManager.MarkInProgress(Convert.ToInt32(args[1]));
@@ -36,7 +37,7 @@ public class Program {
             case "mark-done":
                 if (args.Length < 2) 
                 {
-                    Console.WriteLine("Error: Correct way --> [ID of task] mark-[status]");
+                    Console.WriteLine("Error: Correct way --> mark-[status] [ID of task]");
                     return;
                 }
                 taskManager.MarkDone(Convert.ToInt32(args[1]));
@@ -94,7 +95,7 @@ class TaskManager {
                     }
                     TaskWithStatus[status].Add(task.Value);
                 }
-           }
+            }
         }
     }
 
@@ -105,7 +106,9 @@ class TaskManager {
             Console.WriteLine("Input a parameter");
             return;
         }
-        TaskClass newTask = new() { ID = currID, Description = taskDesc };
+        string dateToday = DateTime.Now.ToString();
+        TaskClass newTask = new() { ID = currID, Description = taskDesc, CreatedAt = dateToday, UpdatedAt = dateToday };
+        Console.WriteLine($"Task added successfully (ID: {currID})");
         Tasks.Add(currID, newTask);
         currID++;
     }
@@ -168,6 +171,7 @@ class TaskManager {
     public void Update(int givenID, string newDescription) 
     {
         Tasks[givenID].Description = newDescription; 
+        Tasks[givenID].UpdatedAt = DateTime.Now.ToString();
     }
 
     public void End() 

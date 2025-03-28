@@ -1,0 +1,15 @@
+C:\Users\Admin\OneDrive\Desktop\Jian J files\Programming\c#\RoadMapProjects\TaskTracker\TaskTracker\bin\Release\net9.0\TaskTracker.exe
+C:\Users\Admin\OneDrive\Desktop\Jian J files\Programming\c#\RoadMapProjects\TaskTracker\TaskTracker\bin\Release\net9.0\TaskTracker.deps.json
+C:\Users\Admin\OneDrive\Desktop\Jian J files\Programming\c#\RoadMapProjects\TaskTracker\TaskTracker\bin\Release\net9.0\TaskTracker.runtimeconfig.json
+C:\Users\Admin\OneDrive\Desktop\Jian J files\Programming\c#\RoadMapProjects\TaskTracker\TaskTracker\bin\Release\net9.0\TaskTracker.dll
+C:\Users\Admin\OneDrive\Desktop\Jian J files\Programming\c#\RoadMapProjects\TaskTracker\TaskTracker\bin\Release\net9.0\TaskTracker.pdb
+C:\Users\Admin\OneDrive\Desktop\Jian J files\Programming\c#\RoadMapProjects\TaskTracker\TaskTracker\obj\Release\net9.0\TaskTracker.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\OneDrive\Desktop\Jian J files\Programming\c#\RoadMapProjects\TaskTracker\TaskTracker\obj\Release\net9.0\TaskTracker.AssemblyInfoInputs.cache
+C:\Users\Admin\OneDrive\Desktop\Jian J files\Programming\c#\RoadMapProjects\TaskTracker\TaskTracker\obj\Release\net9.0\TaskTracker.AssemblyInfo.cs
+C:\Users\Admin\OneDrive\Desktop\Jian J files\Programming\c#\RoadMapProjects\TaskTracker\TaskTracker\obj\Release\net9.0\TaskTracker.csproj.CoreCompileInputs.cache
+C:\Users\Admin\OneDrive\Desktop\Jian J files\Programming\c#\RoadMapProjects\TaskTracker\TaskTracker\obj\Release\net9.0\TaskTracker.sourcelink.json
+C:\Users\Admin\OneDrive\Desktop\Jian J files\Programming\c#\RoadMapProjects\TaskTracker\TaskTracker\obj\Release\net9.0\TaskTracker.dll
+C:\Users\Admin\OneDrive\Desktop\Jian J files\Programming\c#\RoadMapProjects\TaskTracker\TaskTracker\obj\Release\net9.0\refint\TaskTracker.dll
+C:\Users\Admin\OneDrive\Desktop\Jian J files\Programming\c#\RoadMapProjects\TaskTracker\TaskTracker\obj\Release\net9.0\TaskTracker.pdb
+C:\Users\Admin\OneDrive\Desktop\Jian J files\Programming\c#\RoadMapProjects\TaskTracker\TaskTracker\obj\Release\net9.0\TaskTracker.genruntimeconfig.cache
+C:\Users\Admin\OneDrive\Desktop\Jian J files\Programming\c#\RoadMapProjects\TaskTracker\TaskTracker\obj\Release\net9.0\ref\TaskTracker.dll

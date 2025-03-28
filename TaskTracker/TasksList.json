@@ -1,37 +1,9 @@
 {
   "0": {
     "ID": 0,
-    "Description": "some stuff",
+    "Description": "buy groceries",
     "status": "todo",
-    "CreatedAt": null,
-    "UpdatedAt": null
-  },
-  "1": {
-    "ID": 1,
-    "Description": "asdfs",
-    "status": "in-progress",
-    "CreatedAt": null,
-    "UpdatedAt": null
-  },
-  "2": {
-    "ID": 2,
-    "Description": "say you won\u0027t let go",
-    "status": "in-progress",
-    "CreatedAt": null,
-    "UpdatedAt": null
-  },
-  "3": {
-    "ID": 3,
-    "Description": "say you won\u0027t let go, oho oho",
-    "status": "done",
-    "CreatedAt": null,
-    "UpdatedAt": null
-  },
-  "4": {
-    "ID": 4,
-    "Description": "hello world",
-    "status": "todo",
-    "CreatedAt": null,
-    "UpdatedAt": null
+    "CreatedAt": "29/03/2025 6:58:03 am",
+    "UpdatedAt": "29/03/2025 6:58:03 am"
   }
 }
