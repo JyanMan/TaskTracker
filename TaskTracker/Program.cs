@@ -8,18 +8,16 @@ public class Program {
         switch (args[0]) 
         {
             case "add":
-                if (args[1] == null || args[1] == "") 
-                {
-                    Console.WriteLine("Input a parameter");
-                    return;
-                }
-                taskManager.Add(args[1]);
+                if (TaskManager.IsValidParameterCount(2, args.Length))
+                    taskManager.Add(args[1]);
                 break;
             case "list":
-                taskManager.ListTasks();
+                if (TaskManager.IsValidParameterCount(1, args.Length))
+                    taskManager.ListTasks();
                 break;
             case "remove":
-                taskManager.Delete(Convert.ToInt32(args[1]));
+                if (TaskManager.IsValidParameterCount(2, args.Length))
+                    taskManager.Delete(Convert.ToInt32(args[1]));
                 break;
             default:
                 break;
@@ -58,6 +56,11 @@ class TaskManager {
 
     public void Add(string taskDesc) 
     {
+        if (taskDesc == null || taskDesc == "") 
+        {
+            Console.WriteLine("Input a parameter");
+            return;
+        }
         TaskClass newTask = new() { ID = currID, Description = taskDesc };
         Tasks.Add(currID, newTask);
         currID++;
@@ -65,6 +68,11 @@ class TaskManager {
 
     public void Delete(int givenID)
     {
+        if (!Tasks.ContainsKey(givenID))
+        {
+            Console.WriteLine("Tasks list does not contain task with ID " + givenID);
+            return;
+        }
         Tasks.Remove(givenID);
     }
     
@@ -81,6 +89,16 @@ class TaskManager {
     {
         string newFileContent = JsonSerializer.Serialize(Tasks, new JsonSerializerOptions { WriteIndented = true });
         File.WriteAllText(filePath, newFileContent);
+    }
+
+    public static bool IsValidParameterCount(int maxParam, int paramCount) 
+    {
+        if (paramCount > maxParam)
+        {
+            Console.WriteLine("error more than max parameter");
+            return false;
+        }
+        return true;
     }
 }
     
