@@ -28,7 +28,7 @@ public class Program {
             case "mark-in-progress":
                 if (args.Length < 2) 
                 {
-                    Console.WriteLine("indicate the ID of the task to mark in progress");
+                    Console.WriteLine("Error: Correct way --> [ID of task] mark-[status]");
                     return;
                 }
                 taskManager.MarkInProgress(Convert.ToInt32(args[1]));
@@ -36,10 +36,18 @@ public class Program {
             case "mark-done":
                 if (args.Length < 2) 
                 {
-                    Console.WriteLine("indicate the ID of the task to mark done");
+                    Console.WriteLine("Error: Correct way --> [ID of task] mark-[status]");
                     return;
                 }
                 taskManager.MarkDone(Convert.ToInt32(args[1]));
+                break;
+            case "update":
+                if (args.Length < 3)
+                {
+                    Console.WriteLine("Error: Correct way --> update [ID of task] [new description]");
+                    return;
+                }
+                taskManager.Update(Convert.ToInt32(args[1]), args[2]);
                 break;
             default:
                 Console.WriteLine("Invalid command: ");
@@ -155,6 +163,11 @@ class TaskManager {
             return;
         }
         Tasks[givenID].status = "done";
+    }
+
+    public void Update(int givenID, string newDescription) 
+    {
+        Tasks[givenID].Description = newDescription; 
     }
 
     public void End() 
