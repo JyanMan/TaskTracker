@@ -86,35 +86,7 @@ class TaskManager {
                     }
                     TaskWithStatus[status].Add(task.Value);
                 }
-//                switch (status)
-//                {
-//                    case "todo":
-//                        if (!TaskWithStatus.ContainsKey(status)) 
-//                        {
-//                            TaskWithStatus[status] = new();
-//                        }
-//                        TaskWithStatus[status].Add(task.Value);
-//                        break;
-//                    case "in-progress":
-//                        if (!TaskWithStatus.ContainsKey(status)) 
-//                        {
-//                            TaskWithStatus[status] = new();
-//                        }
-//                        TaskWithStatus[status].Add(task.Value);
-//                        break;
-//                    case "done":
-//                        if (!TaskWithStatus.ContainsKey(status)) 
-//                        {
-//                            TaskWithStatus[status] = new();
-//                        }
-//                        TaskWithStatus[status].Add(task.Value);
-//
-//                        break;
-//                    default:
-//                        Console.WriteLine("error in status value, program.cs line 67");
-//                        break;
-//                }
-            }
+           }
         }
     }
 
@@ -156,6 +128,7 @@ class TaskManager {
         if (!statuses.Contains(status))
         {
             Console.WriteLine("invalid command, with status " + status);
+            return;
         }
         for (int i = 0; i < TaskWithStatus[status].Count; i++)
         {
