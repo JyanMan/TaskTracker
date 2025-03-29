@@ -1,27 +1,29 @@
 To use the app
-1. go the bin/Release/net9.0/publish
-2. run cmd
-3. for windows to run the app use: TaskTracker [command]
+1. navigate to TaskTracker\bin\Release\net9.0\publish\
+2. There you'll see the actual files
+3. I published the whole repo to show my c# code
+4. open cmd in that directory
+5. for windows to run the app use: TaskTracker.exe [command]
 
 Commands:
  
- TaskTracker add "task description"
+ TaskTracker.exe add "task description"
     -- to add a task
     
- TaskTracker list
+ TaskTracker.exe list
     --to list all the tasks
     
- TaskTracker list [status]
+ TaskTracker.exe list [status]
     -- the possible statuses are todo, in-progress, done
     -- this lists all tasks with the specific status
     -- this specifies the id of each task
     
- TaskTracker delete [id of task]
+ TaskTracker.exe delete [id of task]
     -- this deletes a task with specific id (to see id of tasks do "TaskTracker list")
     
- TaskTracker update [id of task] [new task description]
+ TaskTracker.exe update [id of task] [new task description]
     -- replaces task description with a new specified one (do "TaskTracker list" to see id of tasks)
 
- TaskTracker mark-in-progress [id of task]
+ TaskTracker.exe mark-in-progress [id of task]
 
- TaskTracker mark-done [id of task]
+ TaskTracker.exe mark-done [id of task]
