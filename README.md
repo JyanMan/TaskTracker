@@ -6,12 +6,21 @@ To use the app
 Commands:
  TaskTracker add "task description"
     -- to add a task
+    
  TaskTracker list
     --to list all the tasks
+    
  TaskTracker list [status]
     -- the possible statuses are todo, in-progress, done
     -- this lists all tasks with the specific status
+    -- this specifies the id of each task
+    
  TaskTracker delete [id of task]
     -- this deletes a task with specific id (to see id of tasks do "TaskTracker list")
+    
  TaskTracker update [id of task] [new task description]
     -- replaces task description with a new specified one (do "TaskTracker list" to see id of tasks)
+
+ TaskTracker mark-in-progress [id of task]
+
+ TaskTracker mark-done [id of task]
