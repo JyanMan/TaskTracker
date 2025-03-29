@@ -4,6 +4,7 @@ To use the app
 3. for windows to run the app use: TaskTracker [command]
 
 Commands:
+ 
  TaskTracker add "task description"
     -- to add a task
     
